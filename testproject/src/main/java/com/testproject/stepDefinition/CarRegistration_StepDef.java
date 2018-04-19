@@ -1,16 +1,17 @@
 package com.testproject.stepDefinition;
 
+import java.io.File;
 import java.util.List;
 
-import com.testprojects.helper.Helper;
-import com.testprojects.pageObjects.CarRegistration;
+import com.testproject.helper.Helper;
+import com.testproject.pageObjects.CarRegistration;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.en.*;
 import junit.framework.Assert;
-import testproject.CarDetails;
-import testproject.FileProperty;
-import testproject.FileUtil;
+import com.testproject.servicelayer.CarDetails;
+import com.testproject.servicelayer.FileProperty;
+import com.testproject.servicelayer.FileUtil;
 
 public class CarRegistration_StepDef {
 	private CarRegistration carRegistration;
@@ -23,7 +24,6 @@ public class CarRegistration_StepDef {
 
 	public CarRegistration_StepDef(CarRegistration carRegistration) {
 		this.carRegistration = carRegistration;
-		//test
 
 	}
 
@@ -76,10 +76,14 @@ public class CarRegistration_StepDef {
 		Helper.getWebDriver().quit();
 	}
 
-	// Given I read files from folder 'C:\Temp\Cars'
 	@Given("^I read files from folder '(.*?)' and verify vehicle details at DVLA$")
 	public void i_read_files_from_folder(String path) {
-		List<FileProperty> lfp = carRegistration.readcardetailsfromfolder(path);
+
+		File file = new File(path);
+		
+		System.out.println("File absolute path : "+file.getAbsolutePath());
+
+		List<FileProperty> lfp = carRegistration.readcardetailsfromfolder(file.getAbsolutePath());
 
 		for (FileProperty fp : lfp) {
 			System.out.println(fp.toString());

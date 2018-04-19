@@ -1,4 +1,4 @@
-package com.testprojects.helper;
+package com.testproject.helper;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import com.testprojects.helper.Helper;
 
 public class Helper {
 
@@ -17,7 +16,7 @@ public class Helper {
 
 	public static void openBrowser()
 	{ 
-		File file=new File("src//test//java//com//browserDriver//IEDriverServer.exe");
+		File file=new File("src//main//resources//com//browserDriver//IEDriverServer.exe");
 		IE_DRIVER_PATH=file.getAbsolutePath();
 		
 		System.setProperty("webdriver.ie.driver", IE_DRIVER_PATH);

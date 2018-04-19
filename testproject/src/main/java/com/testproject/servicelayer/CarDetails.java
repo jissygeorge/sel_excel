@@ -1,4 +1,4 @@
-package testproject;
+package com.testproject.servicelayer;
 
 public class CarDetails {
 
@@ -61,7 +61,8 @@ public class CarDetails {
 		this.rweight = rweight;
 
 	}
-	public String getCarRegNumber(){
+
+	public String getCarRegNumber() {
 		return regNumber;
 	}
 
@@ -80,11 +81,12 @@ public class CarDetails {
 			return false;
 
 		CarDetails inCarDetails = (CarDetails) obj;
-		
-		String incarregNumber = inCarDetails.regNumber.replaceAll("\\s","");
-		String thiscarregNumber = this.regNumber.replaceAll("\\s","");
 
-		boolean ret = (incarregNumber.equalsIgnoreCase(thiscarregNumber) && inCarDetails.make.equalsIgnoreCase(this.make) &&
+		String incarregNumber = inCarDetails.regNumber.replaceAll("\\s", "");
+		String thiscarregNumber = this.regNumber.replaceAll("\\s", "");
+
+		boolean ret = (incarregNumber.equalsIgnoreCase(thiscarregNumber)
+				&& inCarDetails.make.equalsIgnoreCase(this.make) &&
 
 				inCarDetails.DoR.equalsIgnoreCase(this.DoR) &&
 
@@ -98,7 +100,7 @@ public class CarDetails {
 
 				inCarDetails.status.equalsIgnoreCase(this.status) &&
 
-				inCarDetails.color.equalsIgnoreCase(this.color) && 
+				inCarDetails.color.equalsIgnoreCase(this.color) &&
 
 				inCarDetails.approval.equalsIgnoreCase(this.approval) &&
 

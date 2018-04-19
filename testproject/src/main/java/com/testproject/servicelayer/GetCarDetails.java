@@ -1,4 +1,4 @@
-package testproject;
+package com.testproject.servicelayer;
 
 import java.io.File;
 
@@ -20,108 +20,105 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class GetCarDetails {
 
-    public List<CarDetails> getCarDetails(List<FileProperty> lfp){
-    	
-    	List<CarDetails> retls = new LinkedList<CarDetails>();
-    	
-    	
-    	for(FileProperty fp : lfp) {
-    		if(fp.fileMimeType.contains("application/vnd.ms-excel")) {
-    			List<CarDetails> ls = new LinkedList<CarDetails>();
-    			ls = readExcel (fp);
-    			
-    			for(CarDetails car : ls)
-    				retls.add(car);
-    			
-    		}
-    	}
+	public List<CarDetails> getCarDetails(List<FileProperty> lfp) {
+
+		List<CarDetails> retls = new LinkedList<CarDetails>();
+
+		for (FileProperty fp : lfp) {
+			if (fp.fileMimeType.contains("application/vnd.ms-excel")) {
+				List<CarDetails> ls = new LinkedList<CarDetails>();
+				ls = readExcel(fp);
+
+				for (CarDetails car : ls)
+					retls.add(car);
+
+			}
+		}
 		return retls;
-    	
-    }
 
-    public List<CarDetails> readExcel(FileProperty fp) {
+	}
 
-    	List<CarDetails> retls = new LinkedList<CarDetails>();
-    	File file=null;
-    	FileInputStream inputStream=null;
-    //Create an object of File class to open xlsx file
-    try {
-    file =    new File(fp.filepath+"\\"+fp.filename);
+	public List<CarDetails> readExcel(FileProperty fp) {
 
-    //Create an object of FileInputStream class to read excel file
+		List<CarDetails> retls = new LinkedList<CarDetails>();
+		File file = null;
+		FileInputStream inputStream = null;
+		// Create an object of File class to open xlsx file
+		try {
+			file = new File(fp.filepath + "\\" + fp.filename);
 
-    inputStream = new FileInputStream(file);
+			// Create an object of FileInputStream class to read excel file
 
-    Workbook cardetailswb = null;
+			inputStream = new FileInputStream(file);
 
-    //Find the file extension by splitting file name in substring  and getting only extension name
+			Workbook cardetailswb = null;
 
-    String fileExtensionName = fp.filename.substring(fp.filename.indexOf("."));
+			// Find the file extension by splitting file name in substring and
+			// getting only extension name
 
-    //Check condition if the file is xlsx file
+			String fileExtensionName = fp.filename.substring(fp.filename.indexOf("."));
 
-    /*
-    if(fileExtensionName.equals(".xlsx")){
+			// Check condition if the file is xlsx file
 
-    //If it is xlsx file then create object of XSSFWorkbook class
+			/*
+			 * if(fileExtensionName.equals(".xlsx")){
+			 * 
+			 * //If it is xlsx file then create object of XSSFWorkbook class
+			 * 
+			 * guru99Workbook = new XSSFWorkbook(inputStream);
+			 * 
+			 * }
+			 */
 
-    guru99Workbook = new XSSFWorkbook(inputStream);
+			// Check condition if the file is xls file
 
-    }
-    */
+			if (fileExtensionName.equals(".xls")) {
 
-    //Check condition if the file is xls file
+				// If it is xls file then create object of XSSFWorkbook class
 
-    if(fileExtensionName.equals(".xls")){
+				cardetailswb = new HSSFWorkbook(inputStream);
 
-        //If it is xls file then create object of XSSFWorkbook class
+			}
 
-    	cardetailswb = new HSSFWorkbook(inputStream);
+			// Read first sheet inside the workbook by its name
 
-    }
+			Sheet cardetailsws = cardetailswb.getSheetAt(0);
 
-    //Read first sheet inside the workbook by its name
+			// Find number of rows in excel file
 
-    Sheet cardetailsws = cardetailswb.getSheetAt(0);
+			int rowCount = cardetailsws.getLastRowNum() - cardetailsws.getFirstRowNum();
 
-    //Find number of rows in excel file
+			// Create a loop over all the rows of excel file to read it
 
-    int rowCount = cardetailsws.getLastRowNum()-cardetailsws.getFirstRowNum();
+			for (int i = 1; i < rowCount + 1; i++) { // ignore header row
 
-    //Create a loop over all the rows of excel file to read it
+				Row row = cardetailsws.getRow(i);
 
-    for (int i = 1; i < rowCount+1; i++) { //ignore header row
+				if (!row.getCell(0).toString().isEmpty()) {
 
-        Row row = cardetailsws.getRow(i);
-        
-        if(!row.getCell(0).toString().isEmpty()) {
-        
-        	CarDetails newCar = new CarDetails(row.getCell(0).toString().trim(),row.getCell(1).toString().trim()
-        		,row.getCell(2).toString().trim(),row.getCell(3).toString().trim(),row.getCell(4).toString().trim(),
-        		row.getCell(5).toString().trim(),row.getCell(6).toString().trim(),row.getCell(7).toString().trim()
-        		,row.getCell(8).toString().trim(),row.getCell(9).toString().trim(),row.getCell(10).toString().trim()
-        		,row.getCell(11).toString().trim());
+					CarDetails newCar = new CarDetails(row.getCell(0).toString().trim(),
+							row.getCell(1).toString().trim(), row.getCell(2).toString().trim(),
+							row.getCell(3).toString().trim(), row.getCell(4).toString().trim(),
+							row.getCell(5).toString().trim(), row.getCell(6).toString().trim(),
+							row.getCell(7).toString().trim(), row.getCell(8).toString().trim(),
+							row.getCell(9).toString().trim(), row.getCell(10).toString().trim(),
+							row.getCell(11).toString().trim());
 
-        	//System.out.println(newCar.toString());
-        
-        	retls.add(newCar);
-        }
-    	if(inputStream!=null)
-    		inputStream.close();
-    }
-    }catch(IOException io) {
-    	System.out.println(io.getMessage());
-    }
-    catch(Exception ex) {
-    	System.out.println(ex.getMessage());
-    }
+					// System.out.println(newCar.toString());
 
-    
-    return retls;
+					retls.add(newCar);
+				}
+				if (inputStream != null)
+					inputStream.close();
+			}
+		} catch (IOException io) {
+			System.out.println(io.getMessage());
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
 
-    }
+		return retls;
 
-    
-
+	}
 
 }

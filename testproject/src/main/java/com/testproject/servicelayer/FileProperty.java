@@ -1,4 +1,4 @@
-package testproject;
+package com.testproject.servicelayer;
 
 public class FileProperty {
 	String filepath;
@@ -6,17 +6,17 @@ public class FileProperty {
 	String fileext;
 	long filesize;
 	String fileMimeType;
-	
-	public FileProperty (String p, String f, String e, long s, String m) {
+
+	public FileProperty(String p, String f, String e, long s, String m) {
 		this.filepath = p;
 		this.filename = f;
 		this.fileext = e;
 		this.filesize = s;
 		this.fileMimeType = m;
 	}
-	
+
 	public String toString() {
-		return "FilePath : "+filepath+"FileName : " + filename + ", File Extension : " + fileext + ", File Size : " + ((Long)(filesize)).toString() + ", File MIME : " + fileMimeType;
+		return "FilePath : " + filepath + "FileName : " + filename + ", File Extension : " + fileext + ", File Size : "
+				+ ((Long) (filesize)).toString() + ", File MIME : " + fileMimeType;
 	}
 }
-

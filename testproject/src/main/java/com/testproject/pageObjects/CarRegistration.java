@@ -1,12 +1,12 @@
-package com.testprojects.pageObjects;
+package com.testproject.pageObjects;
 
-import com.testprojects.helper.*;
+import com.testproject.helper.*;
 
 import junit.framework.Assert;
-import testproject.CarDetails;
-import testproject.FileProperty;
-import testproject.FileUtil;
-import testproject.GetCarDetails;
+import com.testproject.servicelayer.CarDetails;
+import com.testproject.servicelayer.FileProperty;
+import com.testproject.servicelayer.FileUtil;
+import com.testproject.servicelayer.GetCarDetails;
 
 import java.util.List;
 
