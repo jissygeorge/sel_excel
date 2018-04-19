@@ -1,0 +1,3 @@
+﻿Registration Number,Vehicle make,Date of first registration,Year of manufacture,Cylinder capacity (cc),Fuel type,Export marker,Vehicle status,Vehicle colour,Vehicle type approval,Wheelplan,Revenue weight
+AC64VFT,BMW,January 2015,2015,1995 cc,DIESEL,No,Tax not due,BLACK,M1,2-AXLE-RIGID BODY,Not available
+AG09SSY,HYUNDAI,April 2009,2009,1248 cc,PETROL,No,Tax not due,RED,M1,2-AXLE-RIGID BODY,1095kg

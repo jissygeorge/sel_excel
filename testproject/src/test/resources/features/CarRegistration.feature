@@ -22,4 +22,6 @@ Feature: Functional test to compare car registration details
 #    And I close the browser
 
 Scenario: To read and compare vehicle the details at DVLA
-		Given I read files from folder 'C:\Temp\Cars' and verify vehicle details at DVLA
+		Given I read files from folder 'src//main//resources//InputFiles' and verify vehicle details at DVLA
+		
+		
