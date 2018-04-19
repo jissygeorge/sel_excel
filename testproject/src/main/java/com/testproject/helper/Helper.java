@@ -48,11 +48,21 @@ public class Helper {
 
 		REAL_DRIVER.manage().window().maximize();
 		REAL_DRIVER.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		REAL_DRIVER.get("https://www.gov.uk/get-vehicle-information-from-dvla");
+		//REAL_DRIVER.get("https://www.gov.uk/get-vehicle-information-from-dvla");
 		
 		
 
 		
+	}
+	
+	public static void NavgiateToURL(String URL)
+	{
+		REAL_DRIVER.get(URL);
+	}
+	
+	public static void closeBrowser()
+	{
+		REAL_DRIVER.close();
 	}
 	
 	public static WebDriver getWebDriver()

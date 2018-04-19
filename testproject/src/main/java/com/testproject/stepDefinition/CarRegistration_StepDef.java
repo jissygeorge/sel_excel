@@ -101,8 +101,11 @@ public class CarRegistration_StepDef {
 		boolean verify = true;
 		String errorList = "";
 
+		Helper.openBrowser();
+		
 		for (CarDetails car : carlist) {
-			Helper.openBrowser();
+			
+			Helper.NavgiateToURL("https://www.gov.uk/get-vehicle-information-from-dvla");
 			carRegistration.clickOnStartNowButton();
 			carRegistration.enterRegistrationNumber(car.getCarRegNumber());
 			carRegistration.clickContinue();
@@ -115,6 +118,7 @@ public class CarRegistration_StepDef {
 
 		Assert.assertTrue(errorList, errorList.isEmpty());
 
+		Helper.closeBrowser();
 	}
 
 	// Then verify vehicle details at DVLA
